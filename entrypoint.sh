@@ -1,8 +1,23 @@
 #!/bin/sh
 
+# Install Hugo
+HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r '.tag_name')
+mkdir tmp/ && cd tmp/
+curl -sSL https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/hugo_extended_${HUGO_VERSION: -6}_Linux-64bit.tar.gz | tar -xvzf-
+mv hugo /usr/local/bin/
+cd .. && rm -rf tmp/
+cd ${GITHUB_WORKSPACE}
+hugo version || exit 1
 
-# Build our mkdocs site.
-mkdocs build
+# Build
+if [ "$MINIFY" = "true" ]; then
+  hugo --minify
+else
+  hugo
+fi
+
+# Deploy as configured in your repo
+hugo deploy
 
 #!/bin/sh -l
 
