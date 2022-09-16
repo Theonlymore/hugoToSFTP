@@ -7,7 +7,6 @@ curl -sSL https://github.com/gohugoio/hugo/releases/download/${HUGO_VERSION}/hug
 mv hugo /usr/local/bin/
 cd .. && rm -rf tmp/
 cd ${GITHUB_WORKSPACE}
-hugo version || exit 1
 
 # Build
 if [ "$MINIFY" = "true" ]; then
