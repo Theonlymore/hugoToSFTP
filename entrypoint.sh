@@ -1,7 +1,5 @@
 #!/bin/bash -l
 
-set -eo pipefail
-
 
 # Install Hugo
 HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r '.tag_name')
